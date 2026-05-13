@@ -1,0 +1,35 @@
+name: ML Pipeline CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create sample dataset
+        run: python tests/create_sample.py
+
+      - name: Run tests
+        run: pytest tests/test_pipeline.py -v
+
+      - name: Train model
+        run: python src/train.py
+
+      - name: Promote best model
+        run: python src/evaluate.py
