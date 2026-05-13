@@ -26,7 +26,7 @@ jobs:
         run: python tests/create_sample.py
 
       - name: Run tests
-        run: pytest tests/test_pipeline.py -v
+        run: python - m pytest tests/test_pipeline.py -v
 
       - name: Train model
         run: python src/train.py
