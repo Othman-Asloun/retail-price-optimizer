@@ -21,5 +21,5 @@ df = pd.DataFrame({
 })
 
 os.makedirs("data", exist_ok=True)
-df.to_excel("data/sample_test.xlsx", index=False)
+df.to_excel("data/online_retail_II.xlsx", index=False)
 print(f"Sample dataset created : {df.shape}")
